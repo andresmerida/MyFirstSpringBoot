@@ -1,8 +1,12 @@
 package com.transoft.mfsb;
 
+import com.transoft.mfsb.domain.entity.Country;
+import com.transoft.mfsb.repository.CountryRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
@@ -12,8 +16,14 @@ import java.net.UnknownHostException;
 import java.util.Optional;
 
 @SpringBootApplication
-public class MyFirstSpringBoot {
+public class MyFirstSpringBoot implements ApplicationRunner {
     private static final Logger log = LoggerFactory.getLogger(MyFirstSpringBoot.class);
+
+    private final CountryRepository countryRepository;
+
+    public MyFirstSpringBoot(CountryRepository countryRepository) {
+        this.countryRepository = countryRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(MyFirstSpringBoot.class);
@@ -53,5 +63,14 @@ public class MyFirstSpringBoot {
                 contextPath,
                 env.getActiveProfiles()
         );
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        Country country = new Country();
+        country.setName("Bolivia");
+        country.setInitials("BOL");
+
+        countryRepository.save(country);
     }
 }

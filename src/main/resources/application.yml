@@ -6,13 +6,15 @@ spring:
     name: MFSB
   datasource:
     url: jdbc:h2:mem:testdb
+    #url: jdbc:h2:file:./h2db/testdb
     username: sa
     password: password
     driver-class-name: org.h2.Driver
   h2:
     console:
       enabled: true
-
+      # path to into h2 db. Ex: http://localhost:8080/h2-console
+      path: /h2-console
   jpa:
     show-sql: true
     hibernate:
