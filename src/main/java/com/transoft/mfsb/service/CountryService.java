@@ -8,4 +8,8 @@ import java.util.Optional;
 public interface CountryService {
     List<Country> listCountries();
     Optional<Country> getCountryById(Integer id);
+    Country save(Country country);
+    Country edit(Country country);
+
+    void delete(Integer id);
 }
